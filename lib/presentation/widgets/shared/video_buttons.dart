@@ -1,3 +1,5 @@
+import 'package:animate_do/animate_do.dart';
+import 'package:clon_tiktok/config/helpers/human_format.dart';
 import 'package:clon_tiktok/domain/entities/videos_post.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +18,14 @@ class VideoButtons extends StatelessWidget {
     return Column(
       children: [
         _CustomIconButton(value: video.likes, iconData: Icons.favorite, iconColor: Colors.red),
-        _CustomIconButton(value: video.views, iconData: Icons.remove_red_eye)
+        const SizedBox(height: 20,),
+        _CustomIconButton(value: video.views, iconData: Icons.remove_red_eye),
+        const SizedBox(height: 20,),
+        SpinPerfect(
+          infinite: true,
+          duration: const Duration(seconds: 5),
+          child: const _CustomIconButton(value: 0, iconData: Icons.play_circle_outline)
+        )
       ],
     );
   }
@@ -46,19 +55,9 @@ class _CustomIconButton extends StatelessWidget {
             size: 30,
           )
         ),
-        Text( formatNumber(value) ),
+        if(value > 0)
+        Text( HumanFormat.humanReadbleNumber(value.toDouble())),
       ],
     );
-  }
-}
-
-//Conversion del valor
-String formatNumber(int number) {
-  if(number >= 1000) {
-    return '${(number/1000).toStringAsFixed(1)}k';
-  } else if (number > 99000){
-    return '${(number/1000000).toStringAsFixed(1)}M';
-  } else {
-    return number.toString();
   }
 }
