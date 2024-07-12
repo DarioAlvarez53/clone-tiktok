@@ -15,7 +15,7 @@ class DiscoverScreen extends StatelessWidget {
     return Scaffold(
       body: discoverProvider.initialLoading
         ? const Center(child: CircularProgressIndicator(strokeWidth: 2,)) //en caso de que el initialLoading sea true
-        : VideoScrollView(videos: discoverProvider.videos,) //y si no
+        : VideoScrollView(videos: discoverProvider.videos) //y si no
     );
   }
 }
